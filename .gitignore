@@ -1,0 +1,39 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Model weights
+*.pt
+*.pth
+
+# Environment
+.env
+.venv/
+
+# Node / frontend
+node_modules/
+build/
+frontend/build/
+/frontend/build/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# VSCode
+.vscode/
+
+# Logs
+logs/
+*.log
+
+# Ignore local config
+*.local
+
+# Personal reference files
+New Text Document.txt
+website link.txt
+frontend.rar
