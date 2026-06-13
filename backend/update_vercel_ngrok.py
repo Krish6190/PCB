@@ -2,16 +2,17 @@ import requests
 import os
 import time
 
-# 🚀 Add your actual Vercel API token and project name here
-VERCEL_TOKEN = os.getenv("VERCEL_TOKEN") or "hDHCLr34csCldcYiWzI96yJh"
-PROJECT_NAME = os.getenv("VERCEL_PROJECT_NAME") or "pcbprojectbyak"
+VERCEL_TOKEN = os.getenv("VERCEL_TOKEN") or os.getenv("VERCEL_API_TOKEN") or os.getenv("VC_TOKEN")
+# support multiple names for the project variable
+PROJECT_NAME = os.getenv("VERCEL_PROJECT_NAME") or os.getenv("PROJECT_NAME") or os.getenv("VERCEL_PROJECT")
 
-# ✅ Correct API endpoint (note the formatted project name)
-API_URL = f"https://api.vercel.com/v9/projects/{PROJECT_NAME}/env"
+API_URL = f"https://api.vercel.com/v9/projects/{PROJECT_NAME}/env" if VERCEL_TOKEN and PROJECT_NAME else None
 
 def update_backend_url(new_url):
     print(f"🌍 Updating Vercel environment variable to: {new_url}")
 
+    if not API_URL:
+        raise RuntimeError("VERCEL_TOKEN and VERCEL_PROJECT_NAME must be set in environment")
     headers = {"Authorization": f"Bearer {VERCEL_TOKEN}", "Content-Type": "application/json"}
 
     # 🧩 Get all current environment variables
